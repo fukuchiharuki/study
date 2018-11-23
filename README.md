@@ -21,3 +21,9 @@ $ yarn init
 ```
 $ yarn add --dev @babel/preset-env
 ```
+
+### webpackモジュールを追加する
+
+```
+$ yarn add --dev webpack webpack-cli @babel/core babel-loader
+```
