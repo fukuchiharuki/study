@@ -1,4 +1,6 @@
 const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const src = path.join(__dirname, 'src');
 const dist = path.join(__dirname, 'dist');
@@ -33,5 +35,19 @@ module.exports = {
     ]
   },
   // sourceMappingの設定
-  devtool: 'cheap-module-eval-source-map'
+  devtool: 'cheap-module-eval-source-map',
+  devServer: {
+    // 開発サーバーを立ち上げるディレクトリ
+    contentBase: dist,
+    // hot-reload有効
+    hot: true,
+    // サーバーが利用するポート
+    port: 3000
+  },
+  plugins: [
+    // hot-reloadを有効にするプラグインを追加
+    new webpack.HotModuleReplacementPlugin(),
+    // HtmlWebpackPluginプラグインを追加
+    new HtmlWebpackPlugin()
+  ]
 }
