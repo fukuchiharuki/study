@@ -56,6 +56,8 @@ $ yarn serve
 
 # 第3章 JavaScriptのためのパワフルなツール
 
+## 3.1 ESLint
+
 ### eslint-config-airbnbが指定するバージョンを調べる
 
 ```
@@ -93,4 +95,18 @@ $ yarn lint:js
 
 ```
 $ yarn add --dev eslint-loader
+```
+
+## 3.2 Prettier
+
+### Prettierモジュールを追加する
+
+```
+$ yarn add --dev prettier
+```
+
+### Prettierを実行する
+
+```
+$ yarn prettier
 ```
