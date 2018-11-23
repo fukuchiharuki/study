@@ -14,13 +14,13 @@ module.exports = {
     // 生成されるファイル名
     filename: 'index.bundle.js',
     // 生成先のディレクトリ
-    path: dist
+    path: dist,
   },
   resolve: {
     // import文のパス指定を省略する
     modules: ['node_modules'],
     // .jsまたは.jsxの拡張子を省略する
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
   },
   module: {
     rules: [
@@ -30,9 +30,9 @@ module.exports = {
         // node_modules以下のファイルには適用しない
         exclude: /node_modules/,
         // 使用するloader
-        loader: 'babel-loader'
-      }
-    ]
+        loader: 'babel-loader',
+      },
+    ],
   },
   // sourceMappingの設定
   devtool: 'cheap-module-eval-source-map',
@@ -42,12 +42,12 @@ module.exports = {
     // hot-reload有効
     hot: true,
     // サーバーが利用するポート
-    port: 3000
+    port: 3000,
   },
   plugins: [
     // hot-reloadを有効にするプラグインを追加
     new webpack.HotModuleReplacementPlugin(),
     // HtmlWebpackPluginプラグインを追加
-    new HtmlWebpackPlugin()
-  ]
-}
+    new HtmlWebpackPlugin(),
+  ],
+};
