@@ -1,0 +1,20 @@
+# 現在のディレクトリをrootにする
+root = true
+
+# すべてのファイルに対する設定
+[*]
+# 改行コード
+end_of_line = lf
+# 文字コード
+charset = utf-8
+# ファイル末尾の空行
+insert_final_newline = true
+# 行末日の空白文字削除
+trim_trailing_whitespace = true
+# インデント指定
+indent_style = space
+
+# 指定した拡張子に対する設定
+[*.{js,jsx,css,pcss}]
+# インデント幅
+indent_size = 2
