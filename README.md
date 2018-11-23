@@ -53,3 +53,32 @@ $ yarn add --dev webpack-dev-server html-webpack-plugin
 ```
 $ yarn serve
 ```
+
+## 第3章 JavaScriptのためのパワフルなツール
+
+### eslint-config-airbnbが指定するバージョンを調べる
+
+```
+$ yarn info eslint-config-airbnb peerDependencies
+yarn info v1.12.3
+{ eslint:
+   '^4.19.1 || ^5.3.0',
+  'eslint-plugin-import':
+   '^2.14.0',
+  'eslint-plugin-jsx-a11y':
+   '^6.1.1',
+  'eslint-plugin-react':
+   '^7.11.0' }
+✨  Done in 0.31s.
+```
+
+### ESLintモジュールを追加する
+
+```
+yarn add --dev eslint-config-airbnb \
+eslint@^5.3.0 \
+eslint-plugin-import@^2.14.0 \
+eslint-plugin-jsx-a11y@^6.1.1 \
+eslint-plugin-react@^7.11.0 \
+babel-eslint
+```
