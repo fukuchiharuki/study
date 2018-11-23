@@ -118,3 +118,10 @@ $ yarn prettier
 ```
 $ yarn add --dev flow-bin @babel/preset-flow eslint-plugin-flowtype
 ```
+
+
+### Flowを実行する
+
+```
+$ yarn flow
+```
