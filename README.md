@@ -82,3 +82,9 @@ eslint-plugin-jsx-a11y@^6.1.1 \
 eslint-plugin-react@^7.11.0 \
 babel-eslint
 ```
+
+### ESLintを実行する
+
+```
+$ yarn lint:js
+```
