@@ -1,6 +1,6 @@
 # ネコミミでもわかるフロントエンド開発環境構築
 
-## 第1章 まずは準備から
+# 第1章 まずは準備から
 
 ### yarnをインストールする
 
@@ -20,7 +20,7 @@ $ brew install yarn
 $ yarn init
 ```
 
-## 第2章　JavaScriptを動かす
+# 第2章　JavaScriptを動かす
 
 ### Babelモジュールを追加する
 
@@ -58,4 +58,96 @@ $ yarn add --dev webpack-dev-server html-webpack-plugin
 
 ```
 $ yarn serve
+```
+
+# 第3章 JavaScriptのためのパワフルなツール
+
+## 3.1 ESLint
+
+### eslint-config-airbnbが指定するバージョンを調べる
+
+```
+$ yarn info eslint-config-airbnb peerDependencies
+yarn info v1.12.3
+{ eslint:
+   '^4.19.1 || ^5.3.0',
+  'eslint-plugin-import':
+   '^2.14.0',
+  'eslint-plugin-jsx-a11y':
+   '^6.1.1',
+  'eslint-plugin-react':
+   '^7.11.0' }
+✨  Done in 0.31s.
+```
+
+### ESLintモジュールを追加する
+
+```
+yarn add --dev eslint-config-airbnb \
+eslint@^5.3.0 \
+eslint-plugin-import@^2.14.0 \
+eslint-plugin-jsx-a11y@^6.1.1 \
+eslint-plugin-react@^7.11.0 \
+babel-eslint
+```
+
+### ESLintを実行する
+
+```
+$ yarn lint:js
+```
+
+### eslint-loaderモジュールを追加する
+
+```
+$ yarn add --dev eslint-loader
+```
+
+## 3.2 Prettier
+
+### Prettierモジュールを追加する
+
+```
+$ yarn add --dev prettier
+```
+
+### Prettierを実行する
+
+```
+$ yarn prettier
+```
+
+## 3.3 Flow
+
+### Flowモジュールを追加する
+
+```
+$ yarn add --dev flow-bin @babel/preset-flow eslint-plugin-flowtype
+```
+
+
+### Flowを実行する
+
+```
+$ yarn flow
+```
+
+### VSCodeでFlowを有効にする
+
+次のプラグインをインストールした。後者は便利そうなのでついでに。
+
+- Flow Language Support
+- vscode-flow-ide
+
+プラグインが必要だというので`flow-bin`を`global`にインストールした。
+
+```
+$ yarn global add flow-bin
+```
+
+Workspace Settingsに次を追記する。
+
+```
+"flow.useNPMPackagedFlow": true,
+"javascript.validate.enable": false
 ```

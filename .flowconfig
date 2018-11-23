@@ -1,0 +1,11 @@
+[ignore]
+# Flowの対象外ファイル
+
+[include]
+# ルール以外のFlow対象ファイル
+
+[libs]
+# 外部のFlow定義等ファイル
+
+[options]
+# オプションの定義
