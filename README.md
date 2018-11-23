@@ -27,3 +27,15 @@ $ yarn add --dev @babel/preset-env
 ```
 $ yarn add --dev webpack webpack-cli @babel/core babel-loader
 ```
+
+### JavaScriptをビルドする
+
+```
+$ yarn build:dev
+```
+
+### JavaScriptを実行する
+
+```
+$ node ./dist/index.bundle.js
+```
