@@ -39,3 +39,17 @@ $ yarn build:dev
 ```
 $ node ./dist/index.bundle.js
 ```
+
+### webpack-dev-serverモジュールを追加する
+
+```
+$ yarn add --dev webpack-dev-server html-webpack-plugin
+```
+
+`html-webpack-plugin`は開発サーバー用にHTMLを自動的に出力するプラグイン。
+
+### 開発用サーバーを立ち上げる
+
+```
+$ yarn serve
+```
