@@ -25,6 +25,13 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        // babel-loaderよりも前に実行する
+        enforce: 'pre',
+        loader: 'eslint-loader',
+      },
+      {
         // ルールを適用するファイルの正規表現
         test: /\.(js|jsx)$/,
         // node_modules以下のファイルには適用しない
