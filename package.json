@@ -1,0 +1,8 @@
+{
+  "name": "study",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:fukuchiharuki/study.git",
+  "author": "fukuchiharuki <fukuchi.haruki@gmail.com>",
+  "license": "MIT"
+}
