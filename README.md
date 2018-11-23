@@ -110,3 +110,11 @@ $ yarn add --dev prettier
 ```
 $ yarn prettier
 ```
+
+## 3.3 Flow
+
+### Flowモジュールを追加する
+
+```
+$ yarn add --dev flow-bin @babel/preset-flow eslint-plugin-flowtype
+```
