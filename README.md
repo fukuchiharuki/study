@@ -1,6 +1,6 @@
 # ネコミミでもわかるフロントエンド開発環境構築
 
-## 第1章 まずは準備から
+# 第1章 まずは準備から
 
 ### yarnをインストールする
 
@@ -14,7 +14,7 @@ $ brew install yarn
 $ yarn init
 ```
 
-## 第2章　JavaScriptを動かす
+# 第2章　JavaScriptを動かす
 
 ### Babelモジュールを追加する
 
@@ -54,7 +54,7 @@ $ yarn add --dev webpack-dev-server html-webpack-plugin
 $ yarn serve
 ```
 
-## 第3章 JavaScriptのためのパワフルなツール
+# 第3章 JavaScriptのためのパワフルなツール
 
 ### eslint-config-airbnbが指定するバージョンを調べる
 
