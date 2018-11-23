@@ -13,3 +13,11 @@ $ brew install yarn
 ```
 $ yarn init
 ```
+
+## 第2章　JavaScriptを動かす
+
+### Babelモジュールを追加する
+
+```
+$ yarn add --dev @babel/preset-env
+```
