@@ -7,3 +7,9 @@
 ```
 $ brew install yarn
 ```
+
+### package.jsonを作成する
+
+```
+$ yarn init
+```
