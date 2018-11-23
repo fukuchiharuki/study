@@ -88,3 +88,9 @@ babel-eslint
 ```
 $ yarn lint:js
 ```
+
+### eslint-loaderモジュールを追加する
+
+```
+$ yarn add --dev eslint-loader
+```
