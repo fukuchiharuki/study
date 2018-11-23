@@ -8,6 +8,12 @@
 $ brew install yarn
 ```
 
+### VSCodeでEditorConfigを有効にする
+
+次のプラグインをインストールした。
+
+- EditorConfig for VS Code
+
 ### package.jsonを作成する
 
 ```
