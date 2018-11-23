@@ -5,6 +5,9 @@
   "repository": "git@github.com:fukuchiharuki/study.git",
   "author": "fukuchiharuki <fukuchi.haruki@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "build:dev": "webpack --config webpack.config.js"
+  },
   "devDependencies": {
     "@babel/core": "^7.1.6",
     "@babel/preset-env": "^7.1.6",
