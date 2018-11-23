@@ -125,3 +125,23 @@ $ yarn add --dev flow-bin @babel/preset-flow eslint-plugin-flowtype
 ```
 $ yarn flow
 ```
+
+### VSCodeでFlowを有効にする
+
+次のプラグインをインストールした。後者は便利そうなのでついでに。
+
+- Flow Language Support
+- vscode-flow-ide
+
+プラグインが必要だというので`flow-bin`を`global`にインストールした。
+
+```
+$ yarn global add flow-bin
+```
+
+Workspace Settingsに次を追記する。
+
+```
+"flow.useNPMPackagedFlow": true,
+"javascript.validate.enable": false
+```
