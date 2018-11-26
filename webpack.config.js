@@ -9,7 +9,7 @@ module.exports = {
   // developmentモードで実行する
   mode: 'development',
   // ビルドを実行するファイルパス
-  entry: path.resolve(src, 'js/index.js'),
+  entry: path.resolve(src, 'js/render.jsx'),
   output: {
     // 生成されるファイル名
     filename: 'index.bundle.js',
@@ -55,6 +55,8 @@ module.exports = {
     // hot-reloadを有効にするプラグインを追加
     new webpack.HotModuleReplacementPlugin(),
     // HtmlWebpackPluginプラグインを追加
-    new HtmlWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.resolve(src, 'html/index.html'),
+    }),
   ],
 };
