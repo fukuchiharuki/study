@@ -9,7 +9,7 @@ module.exports = {
   // developmentモードで実行する
   mode: 'development',
   // ビルドを実行するファイルパス
-  entry: path.resolve(src, 'js/index.js'),
+  entry: path.resolve(src, 'js/render.jsx'),
   output: {
     // 生成されるファイル名
     filename: 'index.bundle.js',
