@@ -151,3 +151,12 @@ Workspace Settingsに次を追記する。
 "flow.useNPMPackagedFlow": true,
 "javascript.validate.enable": false
 ```
+
+# 第4章　Reactをはじめる
+
+### Reactモジュールを追加する
+
+```
+$ yarn add react react-dom
+$ yarn add --dev @babel/preset-react
+```
