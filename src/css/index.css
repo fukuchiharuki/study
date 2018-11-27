@@ -7,3 +7,11 @@ body {
   font-size: 0.9rem;
   animation: foo;
 }
+
+.foo {
+  color: white;
+
+  &.bar {
+    color: blue;
+  }
+}
