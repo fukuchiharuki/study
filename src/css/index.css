@@ -1,0 +1,17 @@
+:root {
+  --primary-color: skyblue;
+}
+
+body {
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  animation: foo;
+}
+
+.foo {
+  color: white;
+
+  &.bar {
+    color: blue;
+  }
+}
