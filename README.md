@@ -192,3 +192,9 @@ $ yarn add --dev stylelint stylelint-config-standard
 ```
 $ yarn add --dev postcss-loader
 ```
+
+### PostCSSプラグインを追加する
+
+```
+$ yarn add --dev autoprefixer
+```
