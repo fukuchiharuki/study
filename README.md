@@ -160,3 +160,11 @@ Workspace Settingsに次を追記する。
 $ yarn add react react-dom
 $ yarn add --dev @babel/preset-react
 ```
+
+# 第5章　CSSを適用する
+
+### モジュールを追加する
+
+```
+$ yarn add --dev mini-css-extract-plugin css-loader
+```
