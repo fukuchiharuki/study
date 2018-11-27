@@ -174,3 +174,9 @@ $ yarn add --dev mini-css-extract-plugin css-loader
 ```
 $ yarn add --dev stylelint stylelint-config-standard
 ```
+
+### VSCodeでStyleLintを有効にする
+
+次のプラグインをインストールした。
+
+- stylelint
