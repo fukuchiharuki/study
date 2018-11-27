@@ -198,4 +198,19 @@ $ yarn add --dev postcss-loader
 ```
 $ yarn add --dev autoprefixer
 $ yarn add --dev postcss-custom-properties
+$ yarn add --dev postcss-nesting
+```
+
+### VSCodeでPostCSSを有効にする
+
+次のプラグインをインストールした。
+
+- language-postcss
+
+Workspace Settingsに次を追記した。
+
+```
+"files.associations": {
+   "*.css": "postcss",
+},
 ```
