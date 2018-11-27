@@ -9,7 +9,7 @@
     "build:dev": "webpack --config webpack.config.js",
     "serve": "webpack-dev-server --config webpack.config.js",
     "lint:js": "eslint './src/js/*.{js,jsx}'",
-    "lint:css": "stylelint './src/css/*.{js,css}'",
+    "lint:css": "stylelint './src/css/*.{css}'",
     "prettier": "prettier --write './src/js/*.{js,jsx}'",
     "flow": "flow"
   },
@@ -34,6 +34,7 @@
     "mini-css-extract-plugin": "^0.4.5",
     "postcss-custom-properties": "^8.0.9",
     "postcss-loader": "^3.0.0",
+    "postcss-nesting": "^7.0.0",
     "prettier": "^1.15.2",
     "stylelint": "^9.8.0",
     "stylelint-config-standard": "^18.2.0",
