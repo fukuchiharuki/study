@@ -197,4 +197,5 @@ $ yarn add --dev postcss-loader
 
 ```
 $ yarn add --dev autoprefixer
+$ yarn add --dev postcss-custom-properties
 ```
