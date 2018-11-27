@@ -168,3 +168,9 @@ $ yarn add --dev @babel/preset-react
 ```
 $ yarn add --dev mini-css-extract-plugin css-loader
 ```
+
+### StyleLintモジュールを追加する
+
+```
+$ yarn add --dev stylelint stylelint-config-standard
+```
