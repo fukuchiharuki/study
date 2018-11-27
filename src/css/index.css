@@ -1,4 +1,5 @@
 body {
   color: skyblue;
   font-size: 0.9rem;
+  animation: foo;
 }
