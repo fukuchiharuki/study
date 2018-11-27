@@ -163,11 +163,15 @@ $ yarn add --dev @babel/preset-react
 
 # 第5章　CSSを適用する
 
+## MiniCssExtractPlugin
+
 ### モジュールを追加する
 
 ```
 $ yarn add --dev mini-css-extract-plugin css-loader
 ```
+
+## StyleLint
 
 ### StyleLintモジュールを追加する
 
@@ -180,3 +184,11 @@ $ yarn add --dev stylelint stylelint-config-standard
 次のプラグインをインストールした。
 
 - stylelint
+
+## PostCSS
+
+### モジュールを追加する
+
+```
+$ yarn add --dev postcss-loader
+```
