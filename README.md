@@ -214,3 +214,7 @@ Workspace Settingsに次を追記した。
    "*.css": "postcss",
 },
 ```
+
+# 第6章　ReactとCSSの連携
+
+`CSSModules`は`css-loader`が含んでいる。
