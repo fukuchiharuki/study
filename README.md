@@ -218,3 +218,11 @@ Workspace Settingsに次を追記した。
 # 第6章　ReactとCSSの連携
 
 `CSSModules`は`css-loader`が含んでいる。
+
+# 第7章　爆速でテストを書く
+
+### Jestモジュールを追加する
+
+```
+$ yarn add --dev jest babel-jest 'babel-core@7.0.0-0' @babel/core
+```
