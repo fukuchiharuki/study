@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header> renders correctly 1`] = `
+<h2
+  className="text"
+>
+  Hello Snapshot World
+  <span
+    className="sub"
+  >
+    will nest work?
+  </span>
+</h2>
+`;

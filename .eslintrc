@@ -3,7 +3,8 @@
     "plugins": ["flowtype"],
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "jest": true
     },
     "parser": "babel-eslint",
     "parserOptions": {
