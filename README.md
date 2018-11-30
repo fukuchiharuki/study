@@ -221,14 +221,24 @@ Workspace Settingsに次を追記した。
 
 # 第7章　爆速でテストを書く
 
+## Jest
+
 ### Jestモジュールを追加する
 
 ```
 $ yarn add --dev jest babel-jest 'babel-core@7.0.0-0' @babel/core
 ```
 
+## Reactコンポーネント
+
 ### Reactコンポーネントをテストするためのモジュールを追加する
 
 ```
 $ yarn add --dev react-test-renderer identity-obj-proxy
+```
+
+### Reactコンポーネントのスナップショットを更新する
+
+```
+$ yarn jest -u
 ```
