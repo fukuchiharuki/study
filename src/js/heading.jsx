@@ -10,10 +10,10 @@ type Props = {
 const Heading = (props: Props) => {
   const { name } = props;
   return (
-    <h1 className={styles.text}>
+    <h2 className={styles.text}>
       {`Hello ${name} World`}
       <span className={styles.sub}>will nest work?</span>
-    </h1>
+    </h2>
   );
 };
 
