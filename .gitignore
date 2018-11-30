@@ -6,3 +6,6 @@ dist/
 
 # error logs
 yarn-error.log
+
+# test results
+coverage/
