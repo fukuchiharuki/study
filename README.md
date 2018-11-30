@@ -226,3 +226,9 @@ Workspace Settingsに次を追記した。
 ```
 $ yarn add --dev jest babel-jest 'babel-core@7.0.0-0' @babel/core
 ```
+
+### Reactコンポーネントをテストするためのモジュールを追加する
+
+```
+$ yarn add --dev react-test-renderer identity-obj-proxy
+```
