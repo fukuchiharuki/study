@@ -242,3 +242,11 @@ $ yarn add --dev react-test-renderer identity-obj-proxy
 ```
 $ yarn jest -u
 ```
+
+## カバレッジ
+
+### カバレッジを検査する
+
+```
+$ yarn jest --coverage
+```
