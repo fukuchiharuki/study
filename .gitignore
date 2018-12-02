@@ -3,6 +3,7 @@ node_modules/
 
 # dist directory
 dist/
+docs/
 
 # error logs
 yarn-error.log

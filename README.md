@@ -250,3 +250,17 @@ $ yarn jest -u
 ```
 $ yarn jest --coverage
 ```
+
+# 第8章　プロダクションコードの生成
+
+### webpack-mergeモジュールを追加する
+
+```
+$ yarn add --dev webpack-merge
+```
+
+### csswringモジュールを追加する
+
+```
+$ yarn add --dev csswring
+```
