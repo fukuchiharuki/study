@@ -4,6 +4,9 @@ const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 
 const src = path.join(__dirname, 'src');
 
+// NODE_ENVがproductionかどうか
+const modeIsProd = process.env.NODE_ENV === 'production';
+
 module.exports = {
   // ビルドを実行するファイルパス
   entry: path.resolve(src, 'js/render.jsx'),
@@ -47,6 +50,8 @@ module.exports = {
       template: path.resolve(src, 'html/index.html'),
     }),
     // MiniCSSExtractPluginプラグインを追加
-    new MiniCSSExtractPlugin(),
+    new MiniCSSExtractPlugin({
+      filename: modeIsProd ? 'bundle.min.css' : 'bundle.css',
+    }),
   ],
 };
