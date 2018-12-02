@@ -6,6 +6,7 @@
   "author": "fukuchiharuki <fukuchi.haruki@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "build:prod": "webpack --config webpack.config.prod.js",
     "build:dev": "webpack --config webpack.config.dev.js",
     "serve": "webpack-dev-server --config webpack.config.dev.js",
     "lint:js": "eslint './src/js/*.{js,jsx}'",
