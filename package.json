@@ -6,8 +6,8 @@
   "author": "fukuchiharuki <fukuchi.haruki@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build:dev": "webpack --config webpack.config.js",
-    "serve": "webpack-dev-server --config webpack.config.js",
+    "build:dev": "webpack --config webpack.config.dev.js",
+    "serve": "webpack-dev-server --config webpack.config.dev.js",
     "lint:js": "eslint './src/js/*.{js,jsx}'",
     "lint:css": "stylelint './src/css/*.{css}'",
     "prettier": "prettier --write './src/js/*.{js,jsx}'",
