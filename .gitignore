@@ -5,5 +5,6 @@ build/
 coverage/
 dist/
 docs/
+kusokora/target/
 node_modules/
 yarn-error.log
