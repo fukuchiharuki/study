@@ -1,3 +1,7 @@
+.gradle/
+.idea/
+.vscode/
+build/
 coverage/
 dist/
 docs/
