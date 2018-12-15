@@ -5,6 +5,7 @@ build/
 coverage/
 dist/
 docs/
+hello-cv/
 kusokora/target/
 node_modules/
 yarn-error.log
