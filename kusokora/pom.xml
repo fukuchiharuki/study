@@ -73,6 +73,16 @@
             <classifier>linux-x86</classifier>
             -->
         </dependency>
+        <!-- SpringのJMSサポートとHornetQのクライアントライブラリを追加 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-hornetq</artifactId>
+        </dependency>
+        <!-- 組み込みインメモリHornetQ -->
+        <dependency>
+            <groupId>org.hornetq</groupId>
+            <artifactId>hornetq-jms-server</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>
