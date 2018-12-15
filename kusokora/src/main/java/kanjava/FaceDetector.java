@@ -5,6 +5,8 @@ import org.bytedeco.javacpp.opencv_objdetect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -13,6 +15,7 @@ import java.io.IOException;
 import java.util.function.BiConsumer;
 
 @Component
+@Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class FaceDetector {
     // 分類器のパスをプロパティから取得できるようにする
     @Value("${classifierFile:classpath:/haarcascade_frontalface_default.xml}")

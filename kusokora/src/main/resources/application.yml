@@ -6,4 +6,4 @@ spring:
     mode: embedded
     embedded:
       enabled: true
-      queues: hello # 宛先名
+      queues: hello,faceConverter # 宛先名

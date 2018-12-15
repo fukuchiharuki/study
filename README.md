@@ -87,3 +87,12 @@ $ cat /path/to/before.jpg | curl -v -F 'file=@-' http://localhost:8080/duker > a
 
 - `JmsMessagingTemplate`を（注入して）利用してメッセージを投げて
 - `@JmsListener`でメッセージを拾って処理する
+
+# 5.JMSで画像変換を非同期処理
+
+`@JmsListener`で画像処理をするだけ。だが、画像処理の中にスレッドアンセーフなコードがあるので`prototype`スコープでコンポーネントを注入する必要がある。
+
+```
+@Component
+@Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
+```
