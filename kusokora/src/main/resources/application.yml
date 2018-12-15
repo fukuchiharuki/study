@@ -2,3 +2,8 @@
 spring:
   thymeleaf.cache: false
   main.show-banner: false
+  hornetq:
+    mode: embedded
+    embedded:
+      enabled: true
+      queues: hello # 宛先名

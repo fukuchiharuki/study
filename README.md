@@ -80,3 +80,10 @@ curlでファイルを送信するときは標準入力が使える。ので、�
 ```
 $ cat /path/to/before.jpg | curl -v -F 'file=@-' http://localhost:8080/duker > after.png
 ```
+
+# 4.JMSを使ってみる
+
+基本的にSpringのJMSサポート機能がよしなにしてくれる。
+
+- `JmsMessagingTemplate`を（注入して）利用してメッセージを投げて
+- `@JmsListener`でメッセージを拾って処理する

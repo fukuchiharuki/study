@@ -1,9 +1,15 @@
 package kanjava;
 
 import org.bytedeco.javacpp.opencv_core;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.jms.annotation.JmsListener;
+import org.springframework.jms.core.JmsMessagingTemplate;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,9 +27,15 @@ public class App {
         SpringApplication.run(App.class, args);
     }
 
+    private static final Logger log = LoggerFactory.getLogger(App.class);
+
     // FaceDetectorをインジェクション
     @Autowired
     FaceDetector faceDetector;
+
+    // メッセージ操作用APIのJMSラッパー
+    @Autowired
+    JmsMessagingTemplate jmsMessagingTemplate;
 
     @RequestMapping(value = "/")
     String hello() {
@@ -43,5 +55,22 @@ public class App {
         faceDetector.detectFaces(source, FaceTranslator::duker);
         // Mat -> BufferedImage
         return source.getBufferedImage();
+    }
+
+    @RequestMapping(value = "/send")
+    String send(
+            @RequestParam String msg
+    ) {
+        Message message = MessageBuilder
+                .withPayload(msg)
+                .build();
+        jmsMessagingTemplate.send("hello", message);
+        return "OK";
+    }
+
+    @JmsListener(destination = "hello", concurrency = "1-5")
+    void handleHelloMessage(Message<String> message) {
+        log.info("received! {}", message);
+        log.info("msg={}", message.getPayload());
     }
 }
