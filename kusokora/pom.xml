@@ -19,6 +19,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <start-class>kanjava.App</start-class>
         <java.version>1.8</java.version>
+        <javacv.version>0.10</javacv.version>
+        <opencv.version>2.4.10-${javacv.version}</opencv.version>
     </properties>
 
     <dependencies>
@@ -46,6 +48,30 @@
             <groupId>com.sun.activation</groupId>
             <artifactId>javax.activation</artifactId>
             <version>1.2.0</version>
+        </dependency>
+        <!-- OpenCV -->
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacv</artifactId>
+            <version>${javacv.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bytedeco.javacpp-presets</groupId>
+            <artifactId>opencv</artifactId>
+            <version>${opencv.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bytedeco.javacpp-presets</groupId>
+            <artifactId>opencv</artifactId>
+            <version>${opencv.version}</version>
+            <classifier>${classifier}</classifier>
+            <!--
+            <classifier>windows-x86_64</classifier>
+            <classifier>linux-x86_64</classifier>
+            <classifier>macosx-x86_64</classifier>
+            <classifier>windows-x86</classifier>
+            <classifier>linux-x86</classifier>
+            -->
         </dependency>
     </dependencies>
     <build>
@@ -117,4 +143,54 @@
             </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>macosx-x86_64</id>
+            <activation>
+                <os>
+                    <family>mac</family>
+                    <arch>x86_64</arch>
+                </os>
+            </activation>
+            <properties>
+                <classifier>macosx-x86_64</classifier>
+            </properties>
+        </profile>
+        <profile>
+            <id>linux-x86_64</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                    <arch>amd64</arch>
+                </os>
+            </activation>
+            <properties>
+                <classifier>linux-x86_64</classifier>
+            </properties>
+        </profile>
+        <profile>
+            <id>windows-x86_64</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                    <arch>amd64</arch>
+                </os>
+            </activation>
+            <properties>
+                <classifier>windows-x86_64</classifier>
+            </properties>
+        </profile>
+        <profile>
+            <id>windows-x86</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                    <arch>x86</arch>
+                </os>
+            </activation>
+            <properties>
+                <classifier>windows-x86</classifier>
+            </properties>
+        </profile>
+    </profiles>
 </project>
