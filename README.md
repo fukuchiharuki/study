@@ -48,3 +48,25 @@ pom.xmlに次を追記すると動いた。
 おそらく次のことに絡んでいるものだと思う。
 
 - [java.lang.ClassNotFoundException: javax.xml.bind.JAXBException と来た時の対応 - Qiita]( https://qiita.com/ukiuni@github/items/bf6b14e9aa1090ec4a75)
+
+# 2.[事前準備]JavaでOpenCVを使う
+
+古いOpenCVのAPIを使用する実行でエラーになる。
+
+```
+[ERROR] ソース・オプション5は現在サポートされていません。6以降を使用してください。
+[ERROR] ターゲット・オプション1.5は現在サポートされていません。1.6以降を使用してください。
+```
+
+pom.xmlに次を追記して回避した。（環境に合うところだけでよいはず。）
+
+```
+<properties>
+  <maven.compiler.source>1.8</maven.compiler.source>
+  <maven.compiler.target>1.8</maven.compiler.target>
+</properties>
+```
+
+次の記事に回避策が書かれていた。
+
+- [Mavenまとめ - エンターテイメント！！](http://suzaku-tec.hatenadiary.jp/entry/2017/11/05/145747)
