@@ -83,6 +83,11 @@
             <groupId>org.hornetq</groupId>
             <artifactId>hornetq-jms-server</artifactId>
         </dependency>
+        <!-- WebSocketプログラミングに必要な諸々 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>
