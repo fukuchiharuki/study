@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.messaging.Message;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,11 +73,11 @@ public class App {
         return "OK";
     }
 
-    @JmsListener(destination = "hello", concurrency = "1-5")
-    void handleHelloMessage(Message<String> message) {
-        log.info("received! {}", message);
-        log.info("msg={}", message.getPayload());
-    }
+    //@JmsListener(destination = "hello", concurrency = "1-5")
+    //void handleHelloMessage(Message<String> message) {
+    //    log.info("received! {}", message);
+    //    log.info("msg={}", message.getPayload());
+    //}
 
     @RequestMapping(value = "/queue")
     String queue(
@@ -95,5 +97,12 @@ public class App {
             BufferedImage image = source.getBufferedImage();
             // do nothing
         }
+    }
+
+    @MessageMapping(value = "/greet")
+    @SendTo(value = "/topic/greetings")
+    String greet(String name) {
+        log.info("received {}", name);
+        return "Hello " + name;
     }
 }
