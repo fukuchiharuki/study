@@ -73,12 +73,6 @@ public class App {
         return "OK";
     }
 
-    //@JmsListener(destination = "hello", concurrency = "1-5")
-    //void handleHelloMessage(Message<String> message) {
-    //    log.info("received! {}", message);
-    //    log.info("msg={}", message.getPayload());
-    //}
-
     @RequestMapping(value = "/queue")
     String queue(
             @RequestParam Part file
