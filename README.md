@@ -96,3 +96,15 @@ $ cat /path/to/before.jpg | curl -v -F 'file=@-' http://localhost:8080/duker > a
 @Component
 @Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
 ```
+
+# 6.STOMPを使ってみる
+
+`/topic`がpub-sub、`/queue`がP2P（1対1）。
+
+STOMPの`@Configuration`を用意すると、ひとつの`@Component`に対して複数の`@JmsListener`を定義できなくなる？
+
+```
+InvocationTargetException: Error creating bean with name 'simpAnnotationMethodMessageHandler' defined in class path resource [org/springframework/web/socket/config/annotation/DelegatingWebSocketMessageBrokerConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping found. Cannot map 'app' bean method
+```
+
+これは、`@JmsListener`を別の`@Component`に切り出すことで回避できた。
