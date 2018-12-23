@@ -4,6 +4,7 @@ import org.bytedeco.javacpp.opencv_core;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jms.annotation.JmsListener;
@@ -28,6 +29,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Base64;
 
+import static org.bytedeco.javacpp.opencv_imgproc.INTER_LINEAR;
+import static org.bytedeco.javacpp.opencv_imgproc.resize;
+
 @SpringBootApplication
 @RestController
 public class App {
@@ -36,6 +40,10 @@ public class App {
     }
 
     private static final Logger log = LoggerFactory.getLogger(App.class);
+
+    // プロパティファイルの読み込み or デフォルト
+    @Value("${faceduker.width:200}")
+    int resizedWidth;
 
     // FaceDetectorをインジェクション
     @Autowired
@@ -95,7 +103,13 @@ public class App {
         try (InputStream stream = new ByteArrayInputStream(message.getPayload())) {
             opencv_core.Mat source = opencv_core.Mat.createFrom(ImageIO.read(stream));
             faceDetector.detectFaces(source, FaceTranslator::duker);
-            BufferedImage image = source.getBufferedImage();
+            // resizing from here
+            double ratio = ((double) resizedWidth) / source.cols();
+            int resizedHeight = (int) (ratio * source.rows());
+            opencv_core.Mat out = new opencv_core.Mat(resizedHeight, resizedWidth, source.type());
+            resize(source, out, new opencv_core.Size(), ratio, ratio, INTER_LINEAR);
+            // resizing to here
+            BufferedImage image = out.getBufferedImage();
 
             try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
                 ImageIO.write(image, "png", outputStream);
