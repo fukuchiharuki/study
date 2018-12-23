@@ -4,6 +4,7 @@ import org.bytedeco.javacpp.opencv_core;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jms.annotation.JmsListener;
@@ -11,6 +12,7 @@ import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +24,13 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.Part;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Base64;
+
+import static org.bytedeco.javacpp.opencv_imgproc.INTER_LINEAR;
+import static org.bytedeco.javacpp.opencv_imgproc.resize;
 
 @SpringBootApplication
 @RestController
@@ -34,6 +41,10 @@ public class App {
 
     private static final Logger log = LoggerFactory.getLogger(App.class);
 
+    // プロパティファイルの読み込み or デフォルト
+    @Value("${faceduker.width:200}")
+    int resizedWidth;
+
     // FaceDetectorをインジェクション
     @Autowired
     FaceDetector faceDetector;
@@ -41,6 +52,9 @@ public class App {
     // メッセージ操作用APIのJMSラッパー
     @Autowired
     JmsMessagingTemplate jmsMessagingTemplate;
+
+    @Autowired
+    SimpMessagingTemplate simpMessagingTemplate;
 
     @RequestMapping(value = "/")
     String hello() {
@@ -85,11 +99,26 @@ public class App {
 
     @JmsListener(destination = "faceConverter", concurrency = "1-5")
     void convertFaces(Message<byte[]> message) throws IOException {
+        log.info("received {}", message);
         try (InputStream stream = new ByteArrayInputStream(message.getPayload())) {
             opencv_core.Mat source = opencv_core.Mat.createFrom(ImageIO.read(stream));
             faceDetector.detectFaces(source, FaceTranslator::duker);
-            BufferedImage image = source.getBufferedImage();
-            // do nothing
+            // resizing from here
+            double ratio = ((double) resizedWidth) / source.cols();
+            int resizedHeight = (int) (ratio * source.rows());
+            opencv_core.Mat out = new opencv_core.Mat(resizedHeight, resizedWidth, source.type());
+            resize(source, out, new opencv_core.Size(), ratio, ratio, INTER_LINEAR);
+            // resizing to here
+            BufferedImage image = out.getBufferedImage();
+
+            try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+                ImageIO.write(image, "png", outputStream);
+                outputStream.flush();
+                simpMessagingTemplate.convertAndSend(
+                        "/topic/faces",
+                        Base64.getEncoder().encodeToString(outputStream.toByteArray())
+                );
+            }
         }
     }
 
