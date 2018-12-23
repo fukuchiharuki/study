@@ -11,6 +11,7 @@ import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +23,10 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.Part;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Base64;
 
 @SpringBootApplication
 @RestController
@@ -41,6 +44,9 @@ public class App {
     // メッセージ操作用APIのJMSラッパー
     @Autowired
     JmsMessagingTemplate jmsMessagingTemplate;
+
+    @Autowired
+    SimpMessagingTemplate simpMessagingTemplate;
 
     @RequestMapping(value = "/")
     String hello() {
@@ -85,11 +91,20 @@ public class App {
 
     @JmsListener(destination = "faceConverter", concurrency = "1-5")
     void convertFaces(Message<byte[]> message) throws IOException {
+        log.info("received {}", message);
         try (InputStream stream = new ByteArrayInputStream(message.getPayload())) {
             opencv_core.Mat source = opencv_core.Mat.createFrom(ImageIO.read(stream));
             faceDetector.detectFaces(source, FaceTranslator::duker);
             BufferedImage image = source.getBufferedImage();
-            // do nothing
+
+            try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
+                ImageIO.write(image, "png", outputStream);
+                outputStream.flush();
+                simpMessagingTemplate.convertAndSend(
+                        "/topic/faces",
+                        Base64.getEncoder().encodeToString(outputStream.toByteArray())
+                );
+            }
         }
     }
 
