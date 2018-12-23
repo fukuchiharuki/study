@@ -108,3 +108,7 @@ InvocationTargetException: Error creating bean with name 'simpAnnotationMethodMe
 ```
 
 これは、`@JmsListener`を別の`@Component`に切り出すことで回避できた。
+
+# 7.STOMP over WebSocketで非同期処理結果を受信する
+
+`SimpMessagingTemplate`の`convertAndSend`は引数のオブジェクトを`Message`型にconvertしてsendするということ。`JmsMessagingTemplate`とほぼ同じインタフェース。
