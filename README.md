@@ -112,3 +112,16 @@ InvocationTargetException: Error creating bean with name 'simpAnnotationMethodMe
 # 7.STOMP over WebSocketで非同期処理結果を受信する
 
 `SimpMessagingTemplate`の`convertAndSend`は引数のオブジェクトを`Message`型にconvertしてsendするということ。`JmsMessagingTemplate`とほぼ同じインタフェース。
+
+# 8.WebRTCを使ってみる
+
+WebRTCはプラグイン無しでウェブブラウザ間のボイスチャット・ビデオチャット・ファイル共有ができるリアルタイムコミュニケーションAPI。
+
+`createObjectURL`はのChromeで使えなくなっている。ので、次のようにする。
+
+```
+//video.src = window.URL.createObjectURL(stream);
+video.srcObject = stream;
+```
+
+また、httpsでないと動かないようだが、例外でlocalhostでも動く（Chrome）。
