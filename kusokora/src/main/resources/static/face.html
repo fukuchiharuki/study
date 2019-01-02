@@ -10,25 +10,50 @@
     <button id="disconnect" disabled="disabled">Disconnect</button>
 </div>
 <div>
-    <input type="text" id="name" placeholder="Your Name">
-    <button id="send" disabled="disabled">Send</button>
+    <video autoplay width="400" height="300"></video>
+    <img id="snapshot" src="" width="400" height="300">
+    <canvas style="display:none;" width="400" height="300"></canvas>
+    <br>
+
     <div id="response"></div>
 </div>
 </body>
 <script src="stomp.js"></script>
 <script type="text/javascript">
+    // camera
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || window.navigator.mozGetUserMedia || navigator.msGetUserMedia;
+    window.URL = window.URL || window.webkitURL;
+
     /**
      * 初期化処理
      */
     var HelloStomp = function () {
         this.connectButton = document.getElementById('connect');
         this.disconnectButton = document.getElementById('disconnect');
-        this.sendButton = document.getElementById('send');
+        // this.sendButton = document.getElementById('send'); この行は削除
+        this.video = document.querySelector('video');
+        this.canvas = document.querySelector('canvas');
+        this.canvasContext = this.canvas.getContext('2d');
+        this.snapshot = document.getElementById('snapshot');
+        this.canvasContext.globalAlpha = 1.0;
 
         // イベントハンドラの登録
         this.connectButton.addEventListener('click', this.connect.bind(this));
         this.disconnectButton.addEventListener('click', this.disconnect.bind(this));
-        this.sendButton.addEventListener('click', this.sendName.bind(this));
+        // this.sendButton.addEventListener('click', this.sendName.bind(this)); この行は削除
+        this.video.addEventListener('click', this.takeSnapshot.bind(this));
+
+        // getUserMedia API
+        navigator.getUserMedia({video: true, audio: false},
+                function (stream) {
+                    //this.video.src = window.URL.createObjectURL(stream);
+                    this.video.srcObject = stream;
+                    this.localMediaStream = stream;
+                }.bind(this),
+                function (error) {
+                    alert(JSON.stringify(error));
+                }
+        );
     };
 
     /**
@@ -98,7 +123,28 @@
     HelloStomp.prototype.setConnected = function (connected) {
         this.connectButton.disabled = connected;
         this.disconnectButton.disabled = !connected;
-        this.sendButton.disabled = !connected;
+        // this.sendButton.disabled = !connected; この行は削除
+    };
+
+    /**
+     * カメラのスナップショットを取得
+     */
+    HelloStomp.prototype.takeSnapshot = function () {
+        this.canvasContext.drawImage(this.video, 0, 0, 400, 300);
+        var dataUrl = this.canvas.toDataURL('image/jpeg');
+        this.snapshot.src = dataUrl;
+        this.sendFace(dataUrl);
+    };
+
+    /**
+     * 顔画像の送信
+     */
+    HelloStomp.prototype.sendFace = function (dataUrl) {
+        if (this.stompClient) {
+            this.stompClient.send("/app/faceConverter", {}, dataUrl.replace(/^.*,/, '')); // 宛先'/app/faceConverter'へメッセージを送信
+        } else {
+            alert('not connected!');
+        }
     };
 
     new HelloStomp();
