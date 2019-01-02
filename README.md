@@ -125,3 +125,9 @@ video.srcObject = stream;
 ```
 
 また、httpsでないと動かないようだが、例外でlocalhostでも動く（Chrome）。
+
+# 9.WebRTCで撮った写真を顔変換サービスに送信
+
+1. フロントエンドはSTOMPで`send()`して、サーバーサイドは`@MessageMapping`で受ける。
+1. `JmsMessageTemplate`で`Message`を`send`して、`@JmsListener`で受ける。
+1. サーバーサイドは`SimpMessagingTemplate`で`convertAndSend()`して、フロントエンドはSTOMPで`subscribe`する（しておく）。
