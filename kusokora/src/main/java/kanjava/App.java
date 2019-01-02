@@ -97,6 +97,12 @@ public class App {
         return "OK";
     }
 
+    @MessageMapping(value = "/faceConverter")
+    void faceConverter(String base64Image) {
+        Message<byte[]> message = MessageBuilder.withPayload(Base64.getDecoder().decode(base64Image)).build();
+        jmsMessagingTemplate.send("faceConverter", message);
+    }
+
     @JmsListener(destination = "faceConverter", concurrency = "1-5")
     void convertFaces(Message<byte[]> message) throws IOException {
         log.info("received {}", message);
