@@ -45,3 +45,6 @@
    - IAMポリシー
    - IAMグループ
    - IAMロール
+1. [Day 10. CLIによるAWSの操作とシステム監視](./Day-10.CLIによるAWSの操作とシステム監視.md)
+   - AWS CLIのインストールと設定
+   - CloudWatchの設定とアラートの確認
