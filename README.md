@@ -131,3 +131,55 @@ video.srcObject = stream;
 1. フロントエンドはSTOMPで`send()`して、サーバーサイドは`@MessageMapping`で受ける。
 1. `JmsMessageTemplate`で`Message`を`send`して、`@JmsListener`で受ける。
 1. サーバーサイドは`SimpMessagingTemplate`で`convertAndSend()`して、フロントエンドはSTOMPで`subscribe`する（しておく）。
+
+# 10.Dockerを使ってみる
+
+```
+$ cd /path/to/kusokora/
+$ mvn clean
+$ mvn package
+```
+
+`target/Dcokerfile`の1行目を次のように変更する。
+
+```
+FROM java:8
+```
+
+次を実行してdockerイメージを作成する。
+
+```
+$ cd target
+$ docker build -t spring-boot-docker-demo .
+```
+
+次を実行してdockerコンテナを起動する。
+
+```
+$ docker run -p 8080:8080 -t spring-boot-docker-demo
+```
+
+# 11.顔変換サービスをDocker化
+
+プロファイルを指定してビルドする。
+
+```
+$ mvn clean package -Plinux-x86_64
+```
+
+rpmがドキュメントのとおりだとダウンロードできない。OpenCVが使える環境と合わせて次のようにDockerファイルを変更する。
+
+```
+FROM centos:centos7
+RUN yum -y update && yum clean all
+RUN yum -y install wget glibc gtk2 gstreamer gstreamer-plugins-base libv4l
+RUN wget -c -O /tmp/jdk-8u191-linux-x64.rpm --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-securebackup-cookie" https://download.oracle.com/otn-pub/java/jdk/8u191-b12/2787e4a523244c269598db4e85c51e0c/jdk-8u191-linux-x64.rpm
+RUN yum -y localinstall /tmp/jdk-8u191-linux-x64.rpm
+RUN rm -f /tmp/jdk-8u191-linux-x64.rpm
+
+ADD kusokora.jar /opt/kusokora/
+ADD classes/haarcascade_frontalface_default.xml /opt/kusokora/
+EXPOSE 8080
+WORKDIR /opt/kusokora/
+CMD ["java", "-Xms512m", "-Xmx1g", "-jar", "kusokora.jar", "--classifierFile=haarcascade_frontalface_default.xml"]
+```
