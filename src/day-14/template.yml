@@ -10,6 +10,9 @@ Parameters:
       - t2.small
       - t2.medium
     Description: Select EC2 instance type.
+  KeyPair: 
+    Type: AWS::EC2::KeyPair::KeyName
+    Description: Select KeyPair Name.
 
 Resources: 
   cfnVpc:
@@ -74,6 +77,7 @@ Resources:
           Value: 'cfn-ec2-instance'
       SecurityGroupIds:
         - !Ref cfnSecurityGroup
+      KeyName: !Ref KeyPair
   cfnSecurityGroup:
     Type: "AWS::EC2::SecurityGroup"
     Properties:
