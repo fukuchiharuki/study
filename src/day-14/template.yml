@@ -18,3 +18,33 @@ Resources:
       Tags:
         - Key: 'Name'
           Value: 'cfn-subnet'
+  cfnInternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+      - Key: 'Name'
+        Value: 'cfn-igw'
+  cfnAttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref cfnVpc
+      InternetGatewayId: !Ref cfnInternetGateway
+  cfnRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      Tags:
+        - Key: 'Name'
+          Value: 'cfn-rt'
+      VpcId: !Ref cfnVpc
+  cfnRoute:
+    Type: AWS::EC2::Route
+    DependsOn: cfnInternetGateway
+    Properties:
+      RouteTableId: !Ref cfnRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref cfnInternetGateway
+  cfnSubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref cfnSubnet
+      RouteTableId: !Ref cfnRouteTable
