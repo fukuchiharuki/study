@@ -9,3 +9,12 @@ Resources:
       Tags:
         - Key: 'Name'
           Value: 'cfn-vpc'
+  cfnSubnet:
+    Type: 'AWS::EC2::Subnet'
+    Properties: 
+      VpcId: !Ref cfnVpc
+      CidrBlock: '192.168.1.0/24'
+      MapPublicIpOnLaunch: true
+      Tags:
+        - Key: 'Name'
+          Value: 'cfn-subnet'
