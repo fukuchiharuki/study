@@ -1,0 +1,92 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/7"
+
+  config.vm.synced_folder "../../", "/vagrant", type: "virtualbox", owner: "vagrant", group: "vagrant"
+
+  config.vm.hostname = "l4a-provisioning.localdomain"
+
+  config.vbguest.auto_update = true
+
+  config.vm.provider "virtualbox" do |v|
+    v.name = "l4a-provisioning"
+    v.customize ["modifyvm", :id, "--memory", "1024"]
+  end
+
+  config.vm.network "private_network", ip: "192.168.149.10"
+
+  # Server Provisioning
+  config.vm.provision "shell", inline: <<-SHELL
+#! /bin/bash
+
+# Copy Private Key ( this is only for provisioning server )
+echo "- Copy Private Key"
+tee /home/vagrant/.ssh/id_rsa <<EOS > /dev/null
+-----BEGIN RSA PRIVATE KEY-----
+MIIEogIBAAKCAQEA3NvMTaywRtUzcBoJd9RNhEGiX/sqj7UDOKLU0pZsmRw4vJl4
+Kdj4sB9uYxyUh5uSh02jbDCHGSsy6hkXtonT7epFj+BsQiLauKYSpGKrfDD93714
+AMbMojFY+CJsoAPizvvYZwhULWiawP8QXpRDkaASNOYQfYfEpA/wSb0VjBHfPrYf
+/bYYNY8GQjEZaXnURlO4C70CtqW3ivgRvnc1CtjlU4zqcRPsR1Bv2S0aMMgImop9
+vPCLPV8UZtBy7CNUcHZjxRGjEZKat/3AYdFpRMq4dUiXKOepIpgzK3d5AuaD2rfi
+HbL7pvYlB0CX/Cxo4NIMGxwZFOfJbQmjPz2nkwIDAQABAoIBABF6CyayXZidUl6y
+kME8uY2XrAOwWmPYzRJ0QCcR5DIRe6Pg+RNGqhc1xYRuRIqeku/GAwKSrH4fXv4L
+UkcNjQmsmiiSd76cB3bJHXyImk1PiydjVNWq5ZKIGSQ5hSL8a7w5TZyJmi+lsWlI
+RcFWNiqV4hrxgaiNT9Azuq37GnNk6PZnLS+jVe+e8QK+MXcJPVQl9xL7UgjpykrL
+sj8Lj7nFMVORKiLIgd19seMxhLVOVs2R6ivmD5tnN6dGdNDJ6BA9VtsPbo/axiz5
+wabKyhTgiCn6qSg6tWqBVcjeNahrL7bpYKhuQp2D6VV6Z25aVPRPC5E/2+3MIl9L
+UD1qYzECgYEA+5AxTmDfVoIV6/eUxLQ2Ygcpu2C2CIXEfzIPnTcWPq2YtRI0dtfp
+VYwVHO8RbuHyhAv7Rt66txcSOsyCM58C7F/o8187LbOF2ZBKTyhC9XVWDxhhTqKV
+cBlDTcGHYp0JhJW/euJhROW3ivgJedDK8ePKTGDBosAI2k5B7ckTemUCgYEA4MD5
+VlxYHEkZs27iBapeYX5JH93zelPWf4Azu5Nu2EkQpYF+eetf3pre8h4qrjqkWKCw
+mNCTDT2PJIMysqbuzaXbk7jzs039c0WFG7MqsdPeP5nHCsaysmlB7RrCQIYBt5ap
+o9wZyFbjocpRCctUqhj4WoSTRWE1aSzp5DjsPpcCgYAHTf2QiBGUInzeeDbyq0T0
+/b5BeaJvhurYwqxfZU0ZDtNjVp79YHGfEU0/pNV9wcPX/70RJsCHNn1KBcw2EYT1
+Nie+gWJnhlH5qk3uFH41QG36TDvvG5t5QNKKfHcg7uxq1CpWOCKY7I6y01b7GYv7
+ECE8rIaS4j6fkCwr6m3NXQKBgA79b+PNpubEDV3FUHfWRBM2jAP/FqUbAFxinZCu
+JZ9xSBXxzBCvnSZIqAP39RrHuHxcw0p95sDkUS67PV9i+Nxoanuwwzg7RGMyyMzv
+JzLTEaimRfs3A2YY1RfOSBRrm6O1/bx7CpEtEmORDdScZhouLipDW1suP5SzNSpO
+jZsjAoGAEpGlosutBYeIngX5K5RPh7DgPO3teGuZ44Uy8DwQ6HleijMJ9rmfeLqh
+nWSVWo1KIDu0xh87U95CbQ6oLUTEhAlLbsOt1DwKi3Xoz6FSAherwHE/JWn753Ms
+RaF7EpuucMsYLd4PE66ZlQEDQDlGVFqy9RUycuMM9FC3WsmlQaY=
+-----END RSA PRIVATE KEY-----
+EOS
+chown vagrant /home/vagrant/.ssh/id_rsa
+chmod 600 /home/vagrant/.ssh/id_rsa
+
+# Copy Public Key
+echo "- Copy Public Key"
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDc28xNrLBG1TNwGgl31E2EQaJf+yqPtQM4otTSlmyZHDi8mXgp2PiwH25jHJSHm5KHTaNsMIcZKzLqGRe2idPt6kWP4GxCItq4phKkYqt8MP3fvXgAxsyiMVj4ImygA+LO+9hnCFQtaJrA/xBelEORoBI05hB9h8SkD/BJvRWMEd8+th/9thg1jwZCMRlpedRGU7gLvQK2pbeK+BG+dzUK2OVTjOpxE+xHUG/ZLRowyAiain288Is9XxRm0HLsI1RwdmPFEaMRkpq3/cBh0WlEyrh1SJco56kimDMrd3kC5oPat+Idsvum9iUHQJf8LGjg0gwbHBkU58ltCaM/PaeT vagrant@l4a-provisioning.localdomain" >> /home/vagrant/.ssh/authorized_keys
+sort -u /home/vagrant/.ssh/authorized_keys -o /home/vagrant/.ssh/authorized_keys
+
+echo "####################"
+echo "install middleware"
+echo "####################"
+echo "- pip"
+type pip > /dev/null 2>&1
+if [ $? != 0 ]; then
+  curl -kL https://bootstrap.pypa.io/get-pip.py | python
+  echo "OK"
+else
+  echo "already exist"
+fi
+
+# Install ansible
+echo "- ansible"
+type ansible > /dev/null 2>&1
+if [ $? != 0 ]; then
+  pip install ansible
+  pip install boto3
+  pip install openpyxl
+  echo "OK"
+else
+  echo "already exist"
+fi
+
+# add hosts to /etc/hosts
+if [ ! `cat /etc/hosts | grep -q sandbox` ]; then
+  echo "192.168.149.11 l4a-sandbox.localdomain" >> /etc/hosts
+  echo "add sandbox to /etc/hosts"
+fi
+
+  SHELL
+
+end

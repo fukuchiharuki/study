@@ -1,0 +1,29 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "centos/7"
+  config.vbguest.auto_update = true
+
+  config.vm.hostname = "l4a-sandbox.localdomain"
+
+  config.vm.provider "virtualbox" do |v|
+    v.name = "l4a-sandbox"
+    v.customize ["modifyvm", :id, "--memory", "1024"]
+  end
+
+  config.vm.network "private_network", ip: "192.168.149.11"
+  config.vm.network :forwarded_port, host: 10080, guest: 80
+  config.vm.network :forwarded_port, host: 10443, guest: 443
+  config.vm.network :forwarded_port, host: 13306, guest: 3306
+  config.vm.synced_folder "../../", "/vagrant", type: "virtualbox", owner: "vagrant", group: "vagrant"
+
+  # Server Provisioning
+  config.vm.provision "shell", inline: <<-SHELL
+#! /bin/bash
+
+# Copy Public Key
+echo "- Copy Public Key"
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDc28xNrLBG1TNwGgl31E2EQaJf+yqPtQM4otTSlmyZHDi8mXgp2PiwH25jHJSHm5KHTaNsMIcZKzLqGRe2idPt6kWP4GxCItq4phKkYqt8MP3fvXgAxsyiMVj4ImygA+LO+9hnCFQtaJrA/xBelEORoBI05hB9h8SkD/BJvRWMEd8+th/9thg1jwZCMRlpedRGU7gLvQK2pbeK+BG+dzUK2OVTjOpxE+xHUG/ZLRowyAiain288Is9XxRm0HLsI1RwdmPFEaMRkpq3/cBh0WlEyrh1SJco56kimDMrd3kC5oPat+Idsvum9iUHQJf8LGjg0gwbHBkU58ltCaM/PaeT vagrant@l4a-provisioning.localdomain" >> /home/vagrant/.ssh/authorized_keys
+sort -u /home/vagrant/.ssh/authorized_keys -o /home/vagrant/.ssh/authorized_keys
+
+  SHELL
+
+end
