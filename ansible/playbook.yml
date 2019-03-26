@@ -11,3 +11,18 @@
         name: httpd
         state: started
         enabled: yes
+
+    - name: Set 00-mpm.conf
+      template:
+        src: 00-mpm.conf.j2
+        dest: /etc/httpd/conf.modules.d/00-mpm.conf
+        owner: root
+        group: root
+        mode: 0644
+      notify: Restart httpd
+
+  handlers:
+    - name: Restart httpd
+      service: 
+        name: httpd
+        state: restarted
