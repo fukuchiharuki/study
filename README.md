@@ -56,9 +56,15 @@ default: SSH auth method: private key
 
 <dl>
     <dt>playbook</dt>
-    <dd>ホストグループを指定して構成を定義する</dd>
+    <dd>ホストグループを指定する構成の定義</dd>
+    <dt>task</dt>
+    <dd>構成の要素の定義</dd>
     <dt>inventory</dt>
-    <dd>対象のホストグループを定義する</dd>
+    <dd>対象のホストグループの定義</dd>
+    <dt>template</dt>
+    <dd>配布するファイル</dd>
+    <dt>handler</dt>
+    <dd>task成功時に起動する処理</dd>
 </dl>
 
 ### 実行
