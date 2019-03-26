@@ -1,0 +1,13 @@
+- hosts: sandbox
+  become: yes
+  become_user: root
+  tasks:
+    - name: Install http server
+      yum: 
+        name: httpd
+
+    - name: Start http server
+      service: 
+        name: httpd
+        state: started
+        enabled: yes
