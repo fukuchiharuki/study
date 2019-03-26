@@ -18,14 +18,14 @@ LoadModule mpm_prefork_module modules/mod_mpm_prefork.so
 #LoadModule mpm_event_module modules/mod_mpm_event.so
 
 <IfModule mpm_prefork_module>
-    StartServers 20
-    MinSpareServers 10
-    MaxSpareServers 30
-    ServerLimit 1000
-    MaxRequestWorkers 1000
-    MaxRequestsPerChild 5000
+    StartServers {{ httpd.mpm.StartServers }}
+    MinSpareServers {{ httpd.mpm.MinSpareServers }}
+    MaxSpareServers {{ httpd.mpm.MaxSpareServers }}
+    ServerLimit {{ httpd.mpm.ServerLimit }}
+    MaxRequestWorkers {{ httpd.mpm.MaxRequestWorkers }}
+    MaxRequestsPerChild {{ httpd.mpm.MaxRequestsPerChild }}
 </IfModule>
  
-KeepAlive On
-MaxKeepAliveRequests 100
-KeepAliveTimeout 30
+KeepAlive {{ httpd.mpm.KeepAlive }}
+MaxKeepAliveRequests {{ httpd.mpm.MaxKeepAliveRequests }}
+KeepAliveTimeout {{ httpd.mpm.KeepAliveTimeout }}
