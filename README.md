@@ -65,6 +65,8 @@ default: SSH auth method: private key
     <dd>配布するファイル</dd>
     <dt>handler</dt>
     <dd>task成功時に起動する処理</dd>
+    <dt>group var</dt>
+    <dd>各ホストグループの変数の定義</dd>
 </dl>
 
 ### 実行
