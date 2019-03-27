@@ -49,3 +49,28 @@ default: SSH auth method: private key
 
 - [CentOS - default: SSH auth method: private key から一向に進まない。｜teratail](https://teratail.com/questions/28619)
 - [仮想化支援機構(VT-x/AMD-V)を有効化できません Vagrant upでOS起動失敗した](https://futurismo.biz/archives/1647/)
+
+# Section 3: 簡単なPlaybookを実行する
+
+### 用語
+
+<dl>
+    <dt>playbook</dt>
+    <dd>ホストグループを指定する構成の定義</dd>
+    <dt>task</dt>
+    <dd>構成の要素の定義</dd>
+    <dt>inventory</dt>
+    <dd>対象のホストグループの定義</dd>
+    <dt>template</dt>
+    <dd>配布するファイル</dd>
+    <dt>handler</dt>
+    <dd>task成功時に起動する処理</dd>
+    <dt>group var</dt>
+    <dd>各ホストグループの変数の定義</dd>
+</dl>
+
+### 実行
+
+```
+$ ansible-playbook -i <inventory file> <playbook file>
+```

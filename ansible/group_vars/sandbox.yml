@@ -1,0 +1,11 @@
+httpd:
+  mpm:
+    StartServers: 10
+    MinSpareServers: 10
+    MaxSpareServers: 30
+    ServerLimit: 1000
+    MaxRequestWorkers: 1000
+    MaxRequestsPerChild: 5000
+    KeepAlive: "On"
+    MaxKeepAliveRequests: 100
+    KeepAliveTimeout: 30
