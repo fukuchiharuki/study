@@ -6,3 +6,5 @@
     - unix_groups
     - unix_users
     - httpd
+    - { role: sudoers/allow-all, group_name: group_a }
+    - { role: sudoers/allow-httpd, group_name: group_b }
