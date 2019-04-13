@@ -106,3 +106,9 @@ $ ansible-playbook -i <inventory file> <playbook file>
 ホスト名を設定する。
 
 マジック変数`inventory_hostname`を利用することができる。この変数にはインベントリのホスト名が入る。
+
+## group
+
+（Unix系OSの）グループを作成する。
+
+書式`with_items`を利用することで、同じ設定の仕方で複数の値を指定することができる。
