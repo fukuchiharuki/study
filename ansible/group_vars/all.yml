@@ -1,0 +1,4 @@
+unix_groups:
+  - { name: "group_a", gid: 2100, state: "present" }
+  - { name: "group_b", gid: 2200, state: "present" }
+  - { name: "group_c", gid: 2300, state: "present" }

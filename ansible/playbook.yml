@@ -3,4 +3,5 @@
   become_user: root
   roles:
     - hostname
+    - unix_groups
     - httpd
