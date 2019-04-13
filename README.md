@@ -112,3 +112,23 @@ $ ansible-playbook -i <inventory file> <playbook file>
 （Unix系OSの）グループを作成する。
 
 書式`with_items`を利用することで、同じ設定の仕方で複数の値を指定することができる。
+
+## user
+
+（Unix系OSの）ユーザーを作成する。
+
+公開鍵はモジュール`authorized_key`にて設定する。
+
+ここでは、`passlib`でパスワードを、`ssh-keygen`で公開鍵を作成する。
+
+パスワードは次のコマンドを実行して表示される文字列を使う。
+
+```
+$ python -c "from passlib.hash import sha512_crypt; import getpass; print(sha512_crypt.using(rounds=5000).hash(getpass.getpass()))"
+```
+
+公開鍵は次のコマンドで作成されるファイルの中身を使う。
+
+```
+$ ssh-keygen -t rsa
+```
