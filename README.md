@@ -132,3 +132,11 @@ $ python -c "from passlib.hash import sha512_crypt; import getpass; print(sha512
 ```
 $ ssh-keygen -t rsa
 ```
+
+## template
+
+ファイルを作成する。
+
+テンプレートファイルを元にしてファイルを作成することができる。また、このとき変数を利用したり検査をかけることができる。
+
+playbookから変数の値を指定してroleを利用することができる。
