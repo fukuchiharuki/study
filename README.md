@@ -98,3 +98,11 @@ $ ansible-playbook -i <inventory file> <playbook file>
 ```
 
 実行はrolesに切り出す前と同じ。
+
+# Section 5: よく使うAnsibleモジュール
+
+## hostname
+
+ホスト名を設定する。
+
+マジック変数`inventory_hostname`を利用することができる。この変数にはインベントリのホスト名が入る。
