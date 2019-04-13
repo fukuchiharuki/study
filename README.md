@@ -74,3 +74,27 @@ default: SSH auth method: private key
 ```
 $ ansible-playbook -i <inventory file> <playbook file>
 ```
+
+# Section 4: Roleを作成する
+
+### 用語
+
+<dl>
+    <dt>role</dt>
+    <dd>tasks, templates, handlersをまとめた構成の定義</dd>
+</dl>
+
+### 構成
+
+```
+└ roles/
+  └ <role-name>/
+    ├ handlers/
+    │ └ main.yml
+    ├ tasks/
+    │ └ main.yml
+    └ templates/
+      └ <template-file>
+```
+
+実行はrolesに切り出す前と同じ。
