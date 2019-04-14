@@ -141,9 +141,14 @@ $ ssh-keygen -t rsa
 
 playbookから変数の値を指定してroleを利用することができる。
 
-
 ## yum
 
 パッケージをインストールする。
 
 `yum_repository`でリポジトリを追加する。リポジトリの追加は`dependencies`で依存関係を定義しておくことができる。
+
+## service
+
+サービスを起動する。
+
+`enabled`でOSリブート時の立上げを指定することができる。
