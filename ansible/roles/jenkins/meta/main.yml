@@ -1,0 +1,2 @@
+dependencies:
+  - yum_repository/jenkins

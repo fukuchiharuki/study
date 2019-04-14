@@ -1,0 +1,9 @@
+- name: Add Jenkins-yum repository
+  yum_repository: 
+    name: jenkins
+    description: jenkins-yum repository
+    baseurl: http://pkg.jenkins-ci.org/redhat-stable/
+
+- name: Set jenkins-ci.org.key
+  rpm_key:
+    key: http://pkg.jenkins-ci.org/redhat/jenkins-ci.org.key
