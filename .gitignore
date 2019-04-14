@@ -6,4 +6,5 @@ coverage/
 dist/
 docs/
 node_modules/
+tmp
 yarn-error.log
