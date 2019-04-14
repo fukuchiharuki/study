@@ -98,3 +98,85 @@ $ ansible-playbook -i <inventory file> <playbook file>
 ```
 
 実行はrolesに切り出す前と同じ。
+
+# Section 5: よく使うAnsibleモジュール
+
+## hostname
+
+ホスト名を設定する。
+
+マジック変数`inventory_hostname`を利用することができる。この変数にはインベントリのホスト名が入る。
+
+## group
+
+（Unix系OSの）グループを作成する。
+
+書式`with_items`を利用することで、同じ設定の仕方で複数の値を指定することができる。
+
+## user
+
+（Unix系OSの）ユーザーを作成する。
+
+公開鍵はモジュール`authorized_key`にて設定する。
+
+ここでは、`passlib`でパスワードを、`ssh-keygen`で公開鍵を作成する。
+
+パスワードは次のコマンドを実行して表示される文字列を使う。
+
+```
+$ python -c "from passlib.hash import sha512_crypt; import getpass; print(sha512_crypt.using(rounds=5000).hash(getpass.getpass()))"
+```
+
+公開鍵は次のコマンドで作成されるファイルの中身を使う。
+
+```
+$ ssh-keygen -t rsa
+```
+
+## template
+
+ファイルを作成する。
+
+テンプレートファイルを元にしてファイルを作成することができる。また、このとき変数を利用したり検査をかけることができる。
+
+playbookから変数の値を指定してroleを利用することができる。
+
+## yum
+
+パッケージをインストールする。
+
+`yum_repository`でリポジトリを追加する。リポジトリの追加は`dependencies`で依存関係を定義しておくことができる。
+
+## service
+
+サービスを起動する。
+
+`enabled`でOSリブート時の立上げを指定することができる。
+
+## cron
+
+cronを設定する。
+
+## shell, command
+
+コマンドを実行する。
+
+`register`で変数を介してパイプ的な処理をすることができる。この値は次のような構造をもつことに注意する。
+
+```
+{
+    "changed": true, 
+    "cmd": "date", 
+    "delta": "0:00:00.005543", 
+    "end": "2019-04-14 23:23:49.635525", 
+    "failed": false, 
+    "rc": 0, 
+    "start": "2019-04-14 23:23:49.629982", 
+    "stderr": "", 
+    "stderr_lines": [], 
+    "stdout": "Sun Apr 14 23:23:49 UTC 2019", 
+    "stdout_lines": [
+        "Sun Apr 14 23:23:49 UTC 2019"
+    ]
+}
+```

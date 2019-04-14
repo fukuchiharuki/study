@@ -1,0 +1,5 @@
+- name: Set sudoers
+  template:
+    src: allow-httpd.j2
+    dest: "/etc/sudoers.d/allow-httpd-{{ group_name }}"
+    validate: '/usr/sbin/visudo -cf %s'

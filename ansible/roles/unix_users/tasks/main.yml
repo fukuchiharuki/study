@@ -1,0 +1,18 @@
+- name: Add unix users
+  with_items:
+    - "{{ unix_users }}"
+  user:
+    name: "{{ item.name }}"
+    uid: "{{ item.uid }}"
+    password: "{{ item.password }}"
+    group: "{{ item.group }}"
+    comment: "{{ item.comment }}"
+    state: "{{ item.state }}"
+
+- name: Set authorized key
+  with_items:
+    - "{{ unix_users }}"
+  authorized_key:
+    user: "{{ item.name }}"
+    key: "{{ item.publick_keys }}"
+    state: "{{ item.state }}"

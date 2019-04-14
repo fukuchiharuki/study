@@ -1,0 +1,7 @@
+- name: Add unix groups
+  with_items:
+    - "{{ unix_groups }}"
+  group:
+    name: "{{ item.name }}"
+    gid: "{{ item.gid }}"
+    state: "{{ item.state }}"

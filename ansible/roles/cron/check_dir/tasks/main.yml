@@ -1,0 +1,9 @@
+- name: Creates a cron file under /etc/cron.d
+  cron:
+    name: check dirs
+    weekday: 2
+    minute: 0
+    hour: 12
+    user: root
+    job: ls -alh > /dev/null
+    cron_file: ansible_ls
