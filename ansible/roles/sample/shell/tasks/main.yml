@@ -1,0 +1,9 @@
+- name: Set now
+  shell: date
+  register: now
+
+- debug:
+    msg: "{{ now }}"
+
+- name: log now
+  shell: "echo {{ now.stdout }} > /tmp/now"

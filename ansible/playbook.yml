@@ -10,3 +10,4 @@
     - { role: sudoers/allow-httpd, group_name: group_b }
     - jenkins
     - cron/check_dir
+    - sample/shell
