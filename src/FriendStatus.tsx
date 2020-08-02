@@ -1,19 +1,8 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import ChatAPI, { OnlineStatus } from './ChatAPI';
+import React, { Fragment } from 'react';
+import useFriendStatus from './useFriendStatsu';
 
 function FriendStatus(props: { friend: { id: string } }) {
-  const [isOnline, setIsOnline] = useState<boolean | null>(null);
-
-  function handleStatusChange(status: OnlineStatus) {
-    setIsOnline(status.isOnline);
-  }
-
-  useEffect(() => {
-    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
-    return () => {
-      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);
-    };
-  });
+  const isOnline = useFriendStatus(props.friend.id);
 
   const status = (isOnline === null)
     ? "Loading..."
