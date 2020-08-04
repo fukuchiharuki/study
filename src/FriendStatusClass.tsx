@@ -22,6 +22,7 @@ class FriendStatusClass extends React.Component<Props, { isOnline: boolean | nul
   componentDidUpdate(prevProps: Props) {
     // propsで受け取るfriend.idが変更される可能性がある
     // のでcomponentWillUnmountだけのクリーンアップだけでは不充分
+    if (this.props.friend.id === prevProps.friend.id) return;
     ChatAPI.unsubscribeFromFriendStatus(prevProps.friend.id, this.handleStatusChange);
     ChatAPI.subscribeToFriendStatus(this.props.friend.id, this.handleStatusChange);
   }
