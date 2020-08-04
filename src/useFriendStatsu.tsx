@@ -13,7 +13,7 @@ function useFriendStatus(id: string): boolean | null {
     return () => {
       ChatAPI.unsubscribeFromFriendStatus(id, handleStatusChange);
     };
-  });
+  }, [id]);
 
   return isOnline;
 }

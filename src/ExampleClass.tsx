@@ -5,6 +5,16 @@ class ExampleClass extends React.Component<{}, { count: number }> {
     count: 0,
   };
 
+  componentDidMount() {
+    // 同じコードを2回書く
+    document.title = `You clicked ${this.state.count} times`;
+  }
+
+  componentDidUpdate() {
+    // 同じコードを2回書く
+    document.title = `You clicked ${this.state.count} times`;
+  }
+
   render() {
     const { count } = this.state;
     return (
