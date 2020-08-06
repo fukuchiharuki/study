@@ -14,6 +14,7 @@ class ChatAPI {
   static subscribeToFriendStatus(id: string, handler: (status: OnlineStatus) => void) {
     this.subscribers = this.subscribers.concat([{ id, handler }]);
     console.log(`subscribed(id=${id}, subscribers=${this.subscribers.length})`);
+    this.notify(id, this.onlineStatus.get(id) || false);
   }
 
   static unsubscribeFromFriendStatus(id: string, handler: (status: OnlineStatus) => void) {
