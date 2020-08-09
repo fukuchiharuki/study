@@ -1,8 +1,8 @@
 import React from 'react';
-import Example from './Example';
+import TodoList from './TodoList';
 
 function App() {
-  return <Example />;
+  return <TodoList />;
 }
 
 export default App;
