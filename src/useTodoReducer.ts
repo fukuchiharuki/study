@@ -1,4 +1,4 @@
-import { useState } from "react";
+//import { useState } from "react";
 
 enum TodoActionType {
   ADD,
@@ -44,16 +44,16 @@ export interface TodoItem {
   done: boolean,
 }
 
-export default function useTodoReducer(initialValue: TodoItem[] = []): [TodoItem[], (action: TodoAction) => void] {
-  const [todoList, setTodoList] = useState(initialValue);
-  function dispatch(action: TodoAction) {
-    const nextList = reducer(todoList, action);
-    setTodoList(nextList);
-  }
-  return [todoList, dispatch];
-}
+//export default function useTodoReducer(initialValue: TodoItem[] = []): [TodoItem[], (action: TodoAction) => void] {
+//  const [todoList, setTodoList] = useState(initialValue);
+//  function dispatch(action: TodoAction) {
+//    const nextList = reducer(todoList, action);
+//    setTodoList(nextList);
+//  }
+//  return [todoList, dispatch];
+//}
 
-function reducer(todoList: TodoItem[], action: TodoAction) {
+export default function reducer(todoList: TodoItem[], action: TodoAction) {
   switch(action.type) {
     case TodoActionType.ADD: {
       const id: number = Date.now() * 1000 + Math.floor(Math.random() * 101);
