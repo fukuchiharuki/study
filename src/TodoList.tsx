@@ -1,8 +1,8 @@
-import React, { Fragment, useState } from 'react';
-import useTodoReducer, { TodoItem, doTodo, addTodo, removeTodo } from './useTodoReducer';
+import React, { Fragment, useState, useReducer } from 'react';
+import reducer, { TodoItem, doTodo, addTodo, removeTodo } from './useTodoReducer';
 
 function TodoList() {
-  const [todoList, dispatch] = useTodoReducer();
+  const [todoList, dispatch] = useReducer(reducer, []);
 
   return (
     <div>

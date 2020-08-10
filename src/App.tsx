@@ -1,8 +1,8 @@
 import React from 'react';
-import ContextProvider from './ContextProvider';
+import TodoList from './TodoList';
 
 function App() {
-  return <ContextProvider />;
+  return <TodoList />;
 }
 
 export default App;
