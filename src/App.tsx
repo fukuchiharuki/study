@@ -1,8 +1,8 @@
 import React from 'react';
-import TodoList from './TodoList';
+import FancyUser from './FancyUser';
 
 function App() {
-  return <TodoList />;
+  return <FancyUser />;
 }
 
 export default App;
