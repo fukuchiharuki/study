@@ -1,8 +1,8 @@
 import React from 'react';
-import Counter from './Counter';
+import ContextProvider from './ContextProvider';
 
 function App() {
-  return <Counter initialValue={0} />;
+  return <ContextProvider />;
 }
 
 export default App;
