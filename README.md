@@ -32,8 +32,14 @@ app.use("/graphql", graphqlHTTP({
 }));
 ```
 
+# GraphQL Clients
+
 `curl`から叩くには次のようにする。
 
 ```
-$ curl -i -H 'Content-Type:application/json' -X POST -d '{"query": "query { hello }"}' http://localhost:4000/graphql
+$ curl -i \
+-X POST \
+-H 'Content-Type:application/json' \
+-d '{"query": "query { hello }"}' \
+http://localhost:4000/graphql
 ```
