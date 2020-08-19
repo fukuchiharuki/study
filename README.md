@@ -43,3 +43,17 @@ $ curl -i \
 -d '{"query": "query { hello }"}' \
 http://localhost:4000/graphql
 ```
+
+# Basic Types
+
+次のスカラー型がある。
+
+- `String`
+- `Int`
+- `Float`
+- `Boolean`
+- `ID`
+
+デフォルトでnullable。`String!`でnot-nullableのString。
+
+リスト型は`[Int]`。この場合Intのリスト。
