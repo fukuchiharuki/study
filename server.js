@@ -1,7 +1,6 @@
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
-const { argsToArgsConfig } = require("graphql/type/definition");
 
 const schema = buildSchema(`
   type Query {
