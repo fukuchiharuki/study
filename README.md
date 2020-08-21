@@ -57,3 +57,29 @@ http://localhost:4000/graphql
 デフォルトでnullable。`String!`でnot-nullableのString。
 
 リスト型は`[Int]`。この場合Intのリスト。
+
+# Passing Arguments
+
+エンドポイントは引数をもてる。
+
+```
+type Query {
+  rollDice(numDice: Int!, numSides: Int): [Int]
+}
+```
+
+resolver関数で引数を扱う。
+
+```
+const rootValue = {
+  rollDice: ({ numDice, numSides }) => { /* return something */ }
+};
+```
+
+コードで引数を渡すときは別の変数にマップするといい。
+
+```
+const query = `query RollDice($dice: Int!, $sides: Int) {
+  rollDice(numDice: $dice, numSides: $sides)
+}`;
+```
