@@ -95,3 +95,24 @@ type RandomDie {
 ```
 
 オブジェクトタイプを定義することで、一度のAPIリクエストですべての情報を取得できる。複数回のAPIリクエストでそれをするのに比べてシンプルである。
+
+# Mutations and Input Types
+
+データ更新を伴うエンドポイントは`Mutation`で作る。入力パラメーターは`input`で作る。
+
+```
+type Mutation {
+  createMessage(input: MessageInput): Message
+}
+```
+
+```
+input MessageInput {
+  content: String
+  author: String
+}
+```
+
+入力タイプはスカラー型かリスト型、他の入力タイプだけをフィールドにもてる（他のオブジェクトをフィールドにもてない）。
+
+入力タイプの名前の末尾に`Input`をつけるのは慣例。少しの違いしかない入力タイプと出力タイプをもちたくなるので。
