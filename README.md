@@ -83,3 +83,15 @@ const query = `query RollDice($dice: Int!, $sides: Int) {
   rollDice(numDice: $dice, numSides: $sides)
 }`;
 ```
+
+# Object Types
+
+オブジェクトはフィールドまたは引数のあるメソッドをもてる。クエリタイプと同じ方法で新しいオブジェクトを定義できる。
+
+```
+type RandomDie {
+  roll(numRolls: Int!): [Int]
+}
+```
+
+オブジェクトタイプを定義することで、一度のAPIリクエストですべての情報を取得できる。複数回のAPIリクエストでそれをするのに比べてシンプルである。
