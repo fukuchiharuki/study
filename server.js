@@ -3,29 +3,47 @@ const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
 
 const schema = buildSchema(`
+  input MessageInput {
+    content: String
+    author: String
+  }
+  type Message {
+    id: ID!
+    content: String
+    author: String
+  }
   type Mutation {
-    setMessage(message: String): String
+    createMessage(input: MessageInput): Message
+    updateMessage(id: ID!, input: MessageInput): Message
   }
   type Query {
-    getMessage: String
+    getMessage(id: ID!): Message
   }
 `);
 
-const faceDatabase = {};
+const fakeDatabase = {};
 
 const rootValue = {
-  setMessage: ({message}) => {
-    return faceDatabase.message = message;
+  createMessage: ({ input }) => {
+    const id = Date.now();
+    fakeDatabase[id] = input;
+    return { id, ...input };
   },
-  getMessage: () => {
-    return faceDatabase.message;
+  updateMessage: ({ id, input }) => {
+    if (!fakeDatabase[id]) throw new Error(`unavailable(id=${id})`);
+    fakeDatabase[id] = input;
+    return { id, ...input };
+  },
+  getMessage: ({ id }) => {
+    if (!fakeDatabase[id]) throw new Error(`unavailable(id=${id})`);
+    return { id, ...fakeDatabase[id] };
   },
 };
 
 const app = express();
 app.use("/graphql", graphqlHTTP({
-  schema, 
-  rootValue, 
+  schema,
+  rootValue,
   graphiql: true,
 }));
 app.listen(4000);
