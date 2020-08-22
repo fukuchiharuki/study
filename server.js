@@ -1,20 +1,20 @@
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
+const RandomDie = require("./RandomDie");
 
 const schema = buildSchema(`
+  type RandomDie {
+    roll(numRolls: Int!): [Int]
+  }
   type Query {
-    rollDice(numDice: Int!, numSides: Int): [Int]
+    getDie(numSides: Int): RandomDie
   }
 `);
 
 const rootValue = {
-  rollDice: ({ numDice, numSides }) => {
-    function roll(numSides) {
-      return 1 + Math.floor(Math.random() * numSides);
-    }
-    return Array.from(Array(numDice))
-      .map(_ => roll(numSides || 6));
+  getDie: ({ numSides }) => {
+    return new RandomDie(numSides || 6);
   },
 };
 
