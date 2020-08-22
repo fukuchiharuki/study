@@ -1,20 +1,24 @@
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
-const RandomDie = require("./RandomDie");
 
 const schema = buildSchema(`
-  type RandomDie {
-    roll(numRolls: Int!): [Int]
+  type Mutation {
+    setMessage(message: String): String
   }
   type Query {
-    getDie(numSides: Int): RandomDie
+    getMessage: String
   }
 `);
 
+const faceDatabase = {};
+
 const rootValue = {
-  getDie: ({ numSides }) => {
-    return new RandomDie(numSides || 6);
+  setMessage: ({message}) => {
+    return faceDatabase.message = message;
+  },
+  getMessage: () => {
+    return faceDatabase.message;
   },
 };
 
