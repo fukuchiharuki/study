@@ -1,27 +1,49 @@
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
-const RandomDie = require("./RandomDie");
 
 const schema = buildSchema(`
-  type RandomDie {
-    roll(numRolls: Int!): [Int]
+  input MessageInput {
+    content: String
+    author: String
+  }
+  type Message {
+    id: ID!
+    content: String
+    author: String
+  }
+  type Mutation {
+    createMessage(input: MessageInput): Message
+    updateMessage(id: ID!, input: MessageInput): Message
   }
   type Query {
-    getDie(numSides: Int): RandomDie
+    getMessage(id: ID!): Message
   }
 `);
 
+const fakeDatabase = {};
+
 const rootValue = {
-  getDie: ({ numSides }) => {
-    return new RandomDie(numSides || 6);
+  createMessage: ({ input }) => {
+    const id = Date.now();
+    fakeDatabase[id] = input;
+    return { id, ...input };
+  },
+  updateMessage: ({ id, input }) => {
+    if (!fakeDatabase[id]) throw new Error(`unavailable(id=${id})`);
+    fakeDatabase[id] = input;
+    return { id, ...input };
+  },
+  getMessage: ({ id }) => {
+    if (!fakeDatabase[id]) throw new Error(`unavailable(id=${id})`);
+    return { id, ...fakeDatabase[id] };
   },
 };
 
 const app = express();
 app.use("/graphql", graphqlHTTP({
-  schema, 
-  rootValue, 
+  schema,
+  rootValue,
   graphiql: true,
 }));
 app.listen(4000);
