@@ -116,3 +116,29 @@ input MessageInput {
 入力タイプはスカラー型かリスト型、他の入力タイプだけをフィールドにもてる（他のオブジェクトをフィールドにもてない）。
 
 入力タイプの名前の末尾に`Input`をつけるのは慣例。少しの違いしかない入力タイプと出力タイプをもちたくなるので。
+
+# Authentication and Express Middleware
+
+Expressではミドルウェアを追加することでアスペクト処理できる。
+
+```
+const loggingMiddleware = (request, response, next) => {
+  console.log(`ip: ${request.ip}`);
+  next();
+};
+```
+
+```
+const app = express();
+app.use(loggingMiddleware);
+```
+
+GraphQLでもresolver関数でリクエストオブジェクトを受け取れる。
+
+```
+const rootValue = {
+  ip: function (args, request) {
+    return request.ip;
+  },
+};
+```
