@@ -142,3 +142,18 @@ const rootValue = {
   },
 };
 ```
+
+# Constructing Types
+
+プログラム的にスキーマを作れる。
+
+```
+const queryType = new graphql.GraphQLObjectType({
+  name: "Query",
+  fields: {
+    ...
+  },
+});
+```
+
+`root`オブジェクトを与える代わりに`ObjectType`の`resolve`を実装できる。
