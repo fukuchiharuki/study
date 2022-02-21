@@ -14,6 +14,6 @@
 1. [hands-on/Ansibleによるシステム構成管理](https://github.com/fukuchiharuki/study/tree/hands-on/Ansible%E3%81%AB%E3%82%88%E3%82%8B%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0%E6%A7%8B%E6%88%90%E7%AE%A1%E7%90%86)
    - 避けてきたイマドキのインフラ構築をできるようにするため
    - 教科書：[Udemy](https://www.udemy.com/ansible-aws-modules/)
-1. [tutorials/React-Hooks](https://github.com/fukuchiharuki/study/tree/tutorials/React-Hooks)
+1. [tutorial/React-Hooks](https://github.com/fukuchiharuki/study/tree/tutorial/React-Hooks)
    - フックが正式版になったときにはコードから離れていたため
    - 教科書：[公式ドキュメント](https://ja.reactjs.org/docs/hooks-intro.html)
